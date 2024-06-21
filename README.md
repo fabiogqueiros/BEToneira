@@ -13,10 +13,10 @@ Sendo usado tão como operações de autenticação, cadastro, saques, entre out
 
 <h3>Discentes do Trabalho:</h3>
 Arthur Leogério Bougleux Sodré - arthur_lbs@id.uff.br
-Dário Chen Chen Ye - ##############
-Fábio Gabriel de Queirós - fabiogabriel@midiacom.uff.br
-Leonardo Meato Fernandes - ##############
-Thiago da Rocha Thomaz - ##############
+<br>Dário Chen Chen Ye - ##############
+<br>Fábio Gabriel de Queirós - fabiogabriel@midiacom.uff.br
+<br>Leonardo Meato Fernandes - ##############
+<br>Thiago da Rocha Thomaz - ##############
 
 <!-- Contatos -->
 <h3>Docente responsável:</h3>
