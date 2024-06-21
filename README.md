@@ -3,7 +3,7 @@
 
 <!--<h3>Objetivo:</h3>-->
 # Objetivo
-Neste trabalho tem como objetivo desenvolver habilidades e conhecimento em relação aos conceitos de Projeto de Software, através da estruturação prévia de um modelo livre de uma aplicação qualquer, usando as ferramentas disponíveis e estudadas.
+Neste trabalho tem como objetivo desenvolver habilidades e conhecimento em relação aos conceitos de Projeto de Software, através da estruturação prévia de um projeto livre de uma aplicação qualquer, usando as ferramentas disponíveis e estudadas.
 Para o desenvolvimento em conjunto, será usada a linguagem de programação <b>Java</b> e frameworks como <b>Spring Boot</b>, voltando ao uso de padrões de projetos específicos.
 
 # Escopo
