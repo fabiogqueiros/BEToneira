@@ -10,7 +10,7 @@ public class Roleta extends Jogos{
     private int numeroEscolhido;
 
 
-    @Override
+    //@Override
     public void iniciarJogo(){
         //Implement Method
     }
@@ -18,4 +18,8 @@ public class Roleta extends Jogos{
         //Implements Method
         return new ArrayList<>();
     }
+    public void encerrarJogo(){
+        //Implements Method
+    }
+
 }

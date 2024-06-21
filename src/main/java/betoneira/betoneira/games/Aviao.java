@@ -6,7 +6,7 @@ public class Aviao extends Jogos{
     private float multiplicadorAtual;
 
     
-    @Override
+    //@Override
     public void iniciarJogo(){
         //Implement Method
     }
@@ -17,6 +17,9 @@ public class Aviao extends Jogos{
         //Implements Method
     }
     private void aviaoCrash(){
+        //Implements Method
+    }
+    public void encerrarJogo(){
         //Implements Method
     }
 }

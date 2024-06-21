@@ -8,10 +8,11 @@ public abstract class Jogos {
     private String tipo;
 
     
-    public void iniciarJogo(){
+    public abstract void iniciarJogo();/*{
         //Implement Method
-    }
-    public void encerrarJogo(){
+    }*/
+    public abstract void encerrarJogo();/*{
         //Implement Method
-    };
+    };*/
+    //public abstract void sorteia();
 }

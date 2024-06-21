@@ -4,12 +4,15 @@ import java.sql.Date;
 import java.util.List;
 
 import betoneira.betoneira.Aposta;
+import betoneira.betoneira.random.SorteioInteiro;
+import betoneira.interfaces.InterfaceSorteio;
 
 public class Loteria extends Jogos{
     private Date inicio;
     private Date fim;
     private static Loteria loteria;
     private List<Aposta> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
+    private InterfaceSorteio sorteio;
 
 
     public static Loteria getCurrentLoteria(){
@@ -18,14 +21,16 @@ public class Loteria extends Jogos{
         }
         return loteria;
     }
-    @Override
+    //@Override
     public void iniciarJogo(){
+        this.sorteio = new SorteioInteiro();
         //Implement Method
     }
-    public int sorteia(){//Acho que aqui vai virar uma funcao voi, levado em conta o padrao GoF Observer
-        //Implements Method
+    public int sorteia(){//Acho que aqui vai virar uma funcao void, levado em conta o padrao GoF Observer
+
+        int numero = (int) this.sorteio.sorteia(1, 2);
         for (Aposta apt : this.bilhetes) {
-            apt.encerrarAposta(10.1);
+            apt.encerrarAposta(numero);
             //Implement Method
         };
         return 1;
@@ -37,6 +42,9 @@ public class Loteria extends Jogos{
     public int[] getNumerosValidos(){
         //Implement Method
         return new int[1];
+    }
+    public void encerrarJogo(){
+        //Implements Method
     }
 
 }
