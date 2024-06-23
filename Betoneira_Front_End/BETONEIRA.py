@@ -1,4 +1,5 @@
 from aviao import aviao
+import pygame
 from queries import *
 from aux_functions import *
 from roleta import *
@@ -55,26 +56,31 @@ def aviaoSetup():
 def cor(quantia):
     global email
     opt = getInput(["Vermelho", "Verde", "Branco"])
-    print(f"ODD: {getOdd(opt, 'cor')}")
+    odd = getOdd(opt, 'cor')
+    print(f"ODD: {odd}")
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt2 == 1:
-        roleta("cor", opt, email, quantia)
+        return roleta("cor", opt, email, quantia, odd)
 
 def numero(quantia):
     global email
     opt = getNumeros()
-    print(f"ODD: {getOdd(opt, 'cor')}")
+    odd = getOdd(opt, 'numero')
+    print(f"ODD: {odd}")
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt2 == 1:
-        roleta("num", opt, email, quantia)
+        return roleta("num", opt, email, quantia, odd)
 
 def roletaSetup():
-    quantia = getQuantia()
-    opt = getInput(["Cor", "Número"])
-    if opt == 1:
-        cor(quantia)
-    else:
-        numero(quantia)
+    while True:
+        quantia = getQuantia()
+        opt = getInput(["Cor", "Número"])
+        if opt == 1:
+            cont = cor(quantia)
+        else:
+            cont = numero(quantia)
+        if not cont:
+            break
 
 def jogar():
     while True:

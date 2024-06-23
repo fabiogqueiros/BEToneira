@@ -94,7 +94,7 @@ class Window():
     """
     def close(self):
         pygame.quit()
-        sys.exit()
+        #sys.exit()
         
 #---------------------GETTERS AND SETTERS METHODS-----------------
     """
