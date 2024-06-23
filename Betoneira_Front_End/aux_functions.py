@@ -98,3 +98,12 @@ def isValidDate(data):
             return False
     else:
         return False
+    
+def getNumeros():
+    while True:
+        rsp = input("Selecione Números de 1 a 9 (com espaço entre os números, exemplo: 2 6 7): ")
+        ret = rsp.split()
+        for i in range (len(ret)):
+            ret[i] = int(ret[i])
+        return ret
+

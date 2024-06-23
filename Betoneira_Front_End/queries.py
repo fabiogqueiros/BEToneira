@@ -39,3 +39,6 @@ def geraRanking(opt):
 
 def getQuantia():
     return 200
+
+def getOdd(param, tipo):
+    return 1.85

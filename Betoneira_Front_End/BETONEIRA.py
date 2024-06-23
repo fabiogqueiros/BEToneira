@@ -1,6 +1,7 @@
 from aviao import aviao
 from queries import *
 from aux_functions import *
+from roleta import *
 
 def alterarSenha():
     global email
@@ -51,8 +52,29 @@ def aviaoSetup():
     if opt == 1:
         aviao(quantia)
 
-def roleta():
-    pass
+def cor(quantia):
+    global email
+    opt = getInput(["Vermelho", "Verde", "Branco"])
+    print(f"ODD: {getOdd(opt, 'cor')}")
+    opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
+    if opt2 == 1:
+        roleta("cor", opt, email, quantia)
+
+def numero(quantia):
+    global email
+    opt = getNumeros()
+    print(f"ODD: {getOdd(opt, 'cor')}")
+    opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
+    if opt2 == 1:
+        roleta("num", opt, email, quantia)
+
+def roletaSetup():
+    quantia = getQuantia()
+    opt = getInput(["Cor", "Número"])
+    if opt == 1:
+        cor(quantia)
+    else:
+        numero(quantia)
 
 def jogar():
     while True:
@@ -62,7 +84,7 @@ def jogar():
         elif opt == 2:
             aviaoSetup()
         elif opt == 3:
-            roleta()
+            roletaSetup()
         else:
             break
 
