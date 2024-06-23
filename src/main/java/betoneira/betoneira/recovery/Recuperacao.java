@@ -4,7 +4,7 @@ import betoneira.interfaces.InterfaceRecuperacao;
 
 public class Recuperacao implements InterfaceRecuperacao{
     private String email;
-    private int codigo;
+    private Integer codigo;
     
     
     public void enviarEmail(){};

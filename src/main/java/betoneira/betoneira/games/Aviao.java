@@ -1,7 +1,7 @@
 package betoneira.betoneira.games;
 
 public class Aviao extends Jogos{
-    private int tempo;
+    private Integer tempo;
     private String estado;
     private float multiplicadorAtual;
 
@@ -21,5 +21,9 @@ public class Aviao extends Jogos{
     }
     public void encerrarJogo(){
         //Implements Method
+    }
+    public Integer calcularMultiplicador(){
+        //Implements Method
+        return 1;
     }
 }

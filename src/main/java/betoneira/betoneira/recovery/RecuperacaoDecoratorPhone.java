@@ -4,8 +4,8 @@ import betoneira.interfaces.InterfaceRecuperacao;
 
 public class RecuperacaoDecoratorPhone implements InterfaceRecuperacao{
     private InterfaceRecuperacao recupera;
-    private int codigo;
-    private int phone;
+    private Integer codigo;
+    private Integer phone;
     
     
     RecuperacaoDecoratorPhone(InterfaceRecuperacao recupera){//Exemplo de classe para estender novas funcionalidades para recuperar conta

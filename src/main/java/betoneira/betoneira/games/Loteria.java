@@ -51,5 +51,9 @@ public class Loteria extends Jogos{
                 else apt.encerrarAposta(numero);
         };});
     }
+    public Integer calcularMultiplicador(){
+        //Implements Method
+        return 1;
+    }
 
 }
