@@ -9,9 +9,9 @@ public class SorteioInteiro implements InterfaceSorteio{
         this.random = new Random();
     }
     public Object sorteia(Object inicio, Object fim){
-        int ini = (int) inicio;
-        int fi = (int) fim;
-        int numero = this.random.nextInt(fi - ini);
+        Integer ini = (Integer) inicio;
+        Integer fi = (Integer) fim;
+        Integer numero = this.random.nextInt(fi - ini);
         return numero;
     };
 }

@@ -2,6 +2,7 @@ package betoneira.betoneira.games;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import betoneira.betoneira.Aposta;
 import betoneira.betoneira.random.SorteioInteiro;
@@ -11,8 +12,9 @@ public class Loteria extends Jogos{
     private Date inicio;
     private Date fim;
     private static Loteria loteria;
-    private List<Aposta> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
+    private Map<Integer, List<Aposta>> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
     private InterfaceSorteio sorteio;
+    private Integer[] numerosValidos;//Atualizar o diagrama de classes
 
 
     public static Loteria getCurrentLoteria(){
@@ -26,25 +28,28 @@ public class Loteria extends Jogos{
         this.sorteio = new SorteioInteiro();
         //Implement Method
     }
-    public int sorteia(){//Acho que aqui vai virar uma funcao void, levado em conta o padrao GoF Observer
-
-        int numero = (int) this.sorteio.sorteia(1, 2);
-        for (Aposta apt : this.bilhetes) {
-            apt.encerrarAposta(numero);
-            //Implement Method
-        };
-        return 1;
+    public Integer sorteia(){//Acho que aqui vai virar uma funcao void, levado em conta o padrao GoF Observer (Correcao, fica a mesma coisa, observer ficou em encerrarJogo)
+        Integer numero = (Integer) this.sorteio.sorteia(this.numerosValidos[0], this.numerosValidos[-1]);//Colocar aqui o range de numeros ou cores da aposta (Como retorna o ultimo numero?)
+        return numero;
     }
     public void addBilhetes(Aposta aposta, int numero){//Adicionando observadores aqui
-        this.bilhetes.add(aposta);//Fazer a logica ainda de escolher o numero
+        List<Aposta> temp = this.bilhetes.get(numero);
+        temp.add(aposta);
+        this.bilhetes.put(numero, temp);//Fazer a logica ainda de escolher o numero
         //Implements Method
     }
-    public int[] getNumerosValidos(){
-        //Implement Method
-        return new int[1];
+    public Integer[] getNumerosValidos(){
+        return this.numerosValidos;
     }
     public void encerrarJogo(){
-        //Implements Method
+        Integer numero = this.sorteia();
+        this.bilhetes.forEach((key, value) -> {
+            for (Aposta apt : value) {
+                if(key == numero){//Fazer talvez um tratamento de voltar o multiplicador relativo a cada aposta (desacoplando aposta de Loteria)
+                    apt.encerrarAposta(numero);
+                }
+                else apt.encerrarAposta(numero);
+        };});
     }
 
 }
