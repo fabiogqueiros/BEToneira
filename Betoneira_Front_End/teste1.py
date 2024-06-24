@@ -1,3 +1,5 @@
+# chamador.py
 import subprocess
 
-subprocess.call("python teste2.py")
+subprocess.run(['python', 'teste2.py', "a", "b"])
+

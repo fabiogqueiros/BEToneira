@@ -1,8 +1,6 @@
-from aviao import aviao
-import pygame
 from queries import *
 from aux_functions import *
-from roleta import *
+import subprocess
 
 def alterarSenha():
     global email
@@ -78,7 +76,7 @@ def aviaoSetup():
     quantia = getQuantia()
     opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt == 1:
-        aviao(quantia, email)
+        subprocess.run(['python', 'aviao.py', f"{quantia}", f"{email}"])
 
 def cor(quantia):
     global email
@@ -87,7 +85,8 @@ def cor(quantia):
     print(f"ODD: {odd}")
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt2 == 1:
-        return roleta("cor", opt, email, quantia, odd)
+        return subprocess.run(['python', 'roleta.py', "cor", f"{opt}", f"{email}", f"{quantia}", f"{odd}"])
+        #return roleta("cor", opt, email, quantia, odd)
 
 def numero(quantia):
     global email
@@ -96,17 +95,18 @@ def numero(quantia):
     print(f"ODD: {odd}")
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt2 == 1:
-        return roleta("num", opt, email, quantia, odd)
+        return subprocess.run(['python', 'roleta.py', "num", f"{opt}", f"{email}", f"{quantia}", f"{odd}"])
+        #return roleta("num", opt, email, quantia, odd)
 
 def roletaSetup():
     while True:
         quantia = getQuantia()
         opt = getInput(["Cor", "Número"])
         if opt == 1:
-            cont = cor(quantia)
+            cont = cor(quantia).returncode
         else:
-            cont = numero(quantia)
-        if not cont:
+            cont = numero(quantia).returncode
+        if cont == 1:
             break
 
 def jogar():

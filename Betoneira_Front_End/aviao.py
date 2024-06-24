@@ -1,5 +1,6 @@
 from PPlay.window import *
 from PPlay.sprite import *
+import sys
 
 def aviao(quantia, email):
     janela = Window(1280, 720)
@@ -30,3 +31,10 @@ def aviao(quantia, email):
         fundo.draw()
         aviao.draw()
         janela.update()
+
+
+
+
+quantia = float(sys.argv[1])
+email = sys.argv[2]
+aviao(quantia, email)

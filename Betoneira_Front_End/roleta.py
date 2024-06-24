@@ -2,6 +2,7 @@ from PPlay.window import *
 from PPlay.sprite import *
 from math import *
 from PPlay.mouse import *
+import sys
 
 def roleta(tipo, opt, email, quantia, odd):
     retorno = False
@@ -44,7 +45,7 @@ def roleta(tipo, opt, email, quantia, odd):
             timer += janela.delta_time()
         if timer > 5:
             ganhou = False
-            if tipo == "numero" and resultado == opt:
+            if tipo == "num" and resultado == opt:
                 ganhou = True
             elif tipo == "cor":
                 if opt == 3 and resultado == 1:
@@ -117,3 +118,21 @@ def telaResultado(janela, ganhou, quantia, odd):
 
 def getResultadoRoleta(tipo, opt, email, quantia):
     return 1
+
+
+
+tipo = sys.argv[1]
+opt = sys.argv[2]
+try:
+    opt = int(opt)       # precisa tratar mais
+except ValueError:
+    pass
+email = sys.argv[3]
+quantia = float(sys.argv[4])
+odd = float(sys.argv[5])
+rsp = roleta(tipo, opt, email, quantia, odd)
+if rsp:
+    ret = 0
+else:
+    ret = 1
+sys.exit(ret)
