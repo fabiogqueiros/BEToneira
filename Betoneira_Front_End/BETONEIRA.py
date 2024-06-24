@@ -45,7 +45,33 @@ def perfil():
             break
 
 def loteria():
-    pass
+    global email
+    while True:
+        estado = getEstadoLoteria(email)
+        if estado == 1:
+            numeros = getNumeros(1, 30)
+            quantia = getQuantia()
+            odd = getOdd(numeros, 'loteria')
+            print(f"ODD: {odd}")
+            opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
+            if opt == 1:
+                estado = 2
+                iniciarLoteria(email, quantia, numeros)
+            else:
+                break
+        if estado == 2:
+            info = getLoteriaInfo()
+            print(f"{info[0]} pessoas apostaram")
+            print(f"Restam {info[1]} minutos até o resultado")
+            opt = getInput(["Sair"])
+            break
+        elif estado == 3:
+            resultados = getLoteriaResultados(email)
+            print(f"O número sorteado foi {resultados[0]}")
+            print(f"Você ganhou V${resultados[1]}")
+            opt = getInput(["Apostar Novamente", "Sair"])
+            if opt == 2:
+                break
 
 def aviaoSetup():
     quantia = getQuantia()
@@ -64,7 +90,7 @@ def cor(quantia):
 
 def numero(quantia):
     global email
-    opt = getNumeros()
+    opt = getNumeros(1, 9)
     odd = getOdd(opt, 'numero')
     print(f"ODD: {odd}")
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])

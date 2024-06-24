@@ -99,9 +99,9 @@ def isValidDate(data):
     else:
         return False
     
-def getNumeros():
+def getNumeros(ini, fim): # precisa de mais tratamento
     while True:
-        rsp = input("Selecione Números de 1 a 9 (com espaço entre os números, exemplo: 2 6 7): ")
+        rsp = input(f"Selecione Números de {ini} a {fim} (com espaço entre os números, exemplo: 2 6 7): ")
         ret = rsp.split()
         for i in range (len(ret)):
             ret[i] = int(ret[i])

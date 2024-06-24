@@ -1,3 +1,5 @@
+from random import randint
+
 def autentica(login, senha):
     return True
 
@@ -42,3 +44,15 @@ def getQuantia():
 
 def getOdd(param, tipo):
     return 1.85
+
+def getEstadoLoteria(email):
+    return randint(1, 3)
+
+def iniciarLoteria(email, quantia, numeros):
+    pass
+
+def getLoteriaInfo():
+    return [8000, 4]
+
+def getLoteriaResultados(email):
+    return [24, 0]
