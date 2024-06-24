@@ -74,10 +74,11 @@ def loteria():
                 break
 
 def aviaoSetup():
+    global email
     quantia = getQuantia()
     opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt == 1:
-        aviao(quantia)
+        aviao(quantia, email)
 
 def cor(quantia):
     global email

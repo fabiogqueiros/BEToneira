@@ -28,6 +28,7 @@ def roleta(tipo, opt, email, quantia, odd):
     parouMesmo = False
     parouMesmoMesmo = False
     vel = 5
+    timer = 0
     while True:
         if (mouse.is_button_pressed(1) and parar.x<mouse.get_position()[0]<(parar.x+parar.width) and parar.y<mouse.get_position()[1]<(parar.y+parar.height) and parou == False):
             parou = True
