@@ -87,6 +87,7 @@ def cor(quantia):
     if opt2 == 1:
         return subprocess.run(['python', 'roleta.py', "cor", f"{opt}", f"{email}", f"{quantia}", f"{odd}"])
         #return roleta("cor", opt, email, quantia, odd)
+    return 1
 
 def numero(quantia):
     global email
@@ -97,15 +98,24 @@ def numero(quantia):
     if opt2 == 1:
         return subprocess.run(['python', 'roleta.py', "num", f"{opt}", f"{email}", f"{quantia}", f"{odd}"])
         #return roleta("num", opt, email, quantia, odd)
+    return 1
 
 def roletaSetup():
     while True:
         quantia = getQuantia()
         opt = getInput(["Cor", "Número"])
         if opt == 1:
-            cont = cor(quantia).returncode
+            cont = cor(quantia)
+            try:
+                cont = cont.returncode
+            except:
+                pass
         else:
-            cont = numero(quantia).returncode
+            cont = numero(quantia)
+            try:
+                cont = cont.returncode
+            except:
+                pass
         if cont == 1:
             break
 
