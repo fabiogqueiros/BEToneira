@@ -107,3 +107,13 @@ def getNumeros(ini, fim): # precisa de mais tratamento
             ret[i] = int(ret[i])
         return ret
 
+def getEmail():
+    while True:
+        email = input("Digite o seu email: ")
+        if emailCorreto(email):
+            return email
+        else:
+            print("Email inválido. Tente novamente.")
+
+def emailCorreto(email):
+    return True

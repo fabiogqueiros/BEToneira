@@ -237,7 +237,7 @@ def cadastrar():
                 break
 
 def recuperarSenha():
-    global email
+    email = getEmail()
     cod = enviarCodigo(email)   # ver melhor quem verifica o cod
     while True:
         codigo = input("Digite o código enviado para o seu email: ")
