@@ -38,7 +38,7 @@ def barraDeFiltro(options):
         c = 0
         for i, v in enumerate(options):
             print(f"({i+1}) {v}")
-        filtros = getFiltros()
+        filtros = getFiltros(1, n)
         for v in filtros:
             if 1 <= v <= n:
                 c += 1
@@ -55,12 +55,9 @@ def barraDeFiltro(options):
         getDatas(filtros)
     return filtros
 
-def getFiltros():  #necessita de mais tratamento
-    ipt = input("Quais filtros deseja aplicar? (Números separados por espaços, exemplo: '1 3'. Apertar Enter para nenhum filtro) ")
-    ret = ipt.split()
-    for i in range (len(ret)):
-        ret[i] = int(ret[i])
-    return ret
+def getFiltros(ini, fim):
+    print("Quais filtros deseja aplicar? (Apertar apenas Enter para nenhum filtro) ")
+    return getNumeros(ini, fim)
 
 def getDatas(filtros):
     dataInicio = getData("início")
@@ -99,13 +96,18 @@ def isValidDate(data):
     else:
         return False
     
-def getNumeros(ini, fim): # precisa de mais tratamento
+def getNumeros(ini, fim):
     while True:
         rsp = input(f"Selecione Números de {ini} a {fim} (com espaço entre os números, exemplo: 2 6 7): ")
-        ret = rsp.split()
-        for i in range (len(ret)):
-            ret[i] = int(ret[i])
-        return ret
+        try:
+            ret = rsp.split()
+            for i in range (len(ret)):
+                ret[i] = int(ret[i])
+                if ret[i]>fim or ret[i]<ini:
+                    raise Exception("Número fora da faixa especificada")
+            return ret
+        except:
+            print("Formatação ou dados errados. Tente novamente.")
 
 def getEmail():
     while True:

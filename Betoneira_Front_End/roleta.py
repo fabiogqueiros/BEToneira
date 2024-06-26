@@ -45,7 +45,7 @@ def roleta(tipo, opt, email, quantia, odd):
             timer += janela.delta_time()
         if timer > 5:
             ganhou = False
-            if tipo == "num" and resultado == opt:
+            if tipo == "num" and resultado in opt:
                 ganhou = True
             elif tipo == "cor":
                 if opt == 3 and resultado == 1:
@@ -64,7 +64,6 @@ def roleta(tipo, opt, email, quantia, odd):
         parar.draw()
         seta.draw()
         janela.update()
-    #janela.close()
     return retorno
 
 def telaResultado(janela, ganhou, quantia, odd):
@@ -124,9 +123,12 @@ def getResultadoRoleta(tipo, opt, email, quantia):
 tipo = sys.argv[1]
 opt = sys.argv[2]
 try:
-    opt = int(opt)       # precisa tratar mais
+    opt = int(opt)
 except ValueError:
-    pass
+    opt = (opt[1:-1]).split(", ")
+    for i in range (len(opt)):
+        opt[i] = int(opt[i])
+print(opt)
 email = sys.argv[3]
 quantia = float(sys.argv[4])
 odd = float(sys.argv[5])

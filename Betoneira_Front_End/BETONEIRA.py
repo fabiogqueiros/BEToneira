@@ -23,10 +23,15 @@ def editarPerfil():
         opt = getInput(["Alterar Username", "Alterar Nickname", "Alterar Senha", "Voltar"])
         if opt == 1:
             novo = input("Novo Username: ")  #é possível fazer mais tratamento aqui
-            alteraUsername(email, novo)
+            check = alteraUsername(email, novo)
+            if check:
+                print("Username atualizado com sucesso!")
+            else:
+                print("Esse Username já está sendo usado.")
         elif opt == 2:
             novo = input("Novo Nickname: ")
             alteraNickname(email, novo)
+            print("Nickname alterado com sucesso!")
         elif opt == 3:
             alterarSenha()
         else:
@@ -90,7 +95,6 @@ def cor(quantia):
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt2 == 1:
         return subprocess.run(['python', 'roleta.py', "cor", f"{opt}", f"{email}", f"{quantia}", f"{odd}"])
-        #return roleta("cor", opt, email, quantia, odd)
     return 1
 
 def numero(quantia):
@@ -101,7 +105,6 @@ def numero(quantia):
     opt2 = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
     if opt2 == 1:
         return subprocess.run(['python', 'roleta.py', "num", f"{opt}", f"{email}", f"{quantia}", f"{odd}"])
-        #return roleta("num", opt, email, quantia, odd)
     return 1
 
 def roletaSetup():
@@ -228,10 +231,12 @@ def login():
 
 def cadastrar():
     while True:
-        login = input("Login: ")
+        email = input("Email: ")
+        username = input("Username: ")
+        nickname = input("Nickname: ")
         senha = input("Senha: ")
         confirmação = input("Senha Novamente: ")
-        if cadastra(login, senha, confirmação):
+        if cadastra(email, username, nickname, senha, confirmação):
             print("Cadastrado com sucesso!")
             break
         else:
@@ -242,7 +247,7 @@ def cadastrar():
 
 def recuperarSenha():
     email = getEmail()
-    cod = enviarCodigo(email)   # ver melhor quem verifica o cod
+    cod = enviarCodigo(email)   # vê melhor quem verifica o cod e jogar o "nova" pro servidor
     while True:
         codigo = input("Digite o código enviado para o seu email: ")
         if codigo == cod:

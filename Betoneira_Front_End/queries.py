@@ -3,7 +3,7 @@ from random import randint
 def autentica(login, senha):
     return True
 
-def cadastra(login, senha, confirmação):
+def cadastra(email, username, nickname, senha, confirmação):
     return True
 
 def enviarCodigo(email):
