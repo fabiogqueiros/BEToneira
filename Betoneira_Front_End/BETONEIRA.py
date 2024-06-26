@@ -73,10 +73,14 @@ def loteria():
 
 def aviaoSetup():
     global email
-    quantia = getQuantia()
-    opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
-    if opt == 1:
-        subprocess.run(['python', 'aviao.py', f"{quantia}", f"{email}"])
+    while True:
+        quantia = getQuantia()
+        opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
+        if opt == 1:
+            cont = subprocess.run(['python', 'aviao.py', f"{quantia}", f"{email}"]).returncode
+            if cont == 1:
+                break
+                
 
 def cor(quantia):
     global email
