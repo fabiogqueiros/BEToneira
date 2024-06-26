@@ -18,7 +18,7 @@ Sendo usado tão como operações de autenticação, cadastro, saques, entre out
 Arthur Leogério Bougleux Sodré - arthur_lbs@id.uff.br
 <br>Dário Chen Chen Ye - ##############
 <br>Fábio Gabriel de Queirós - fabiogabriel@midiacom.uff.br
-<br>Leonardo Meato Fernandes - ##############
+<br>Leonardo Meato Fernandes - lmeato@id.uff.br
 <br>Thiago da Rocha Thomaz - trthomaz@id.uff.br
 
 <!-- Contatos -->
