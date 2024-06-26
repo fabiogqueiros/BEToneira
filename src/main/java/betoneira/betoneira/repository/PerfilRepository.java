@@ -9,7 +9,7 @@ public interface PerfilRepository extends CrudRepository<Perfil, Integer> {
 
     List<Perfil> findAll();
 
-    Perfil findById(String id);
+    Perfil findById(int id);
 
     void delete(Perfil perfil);
 

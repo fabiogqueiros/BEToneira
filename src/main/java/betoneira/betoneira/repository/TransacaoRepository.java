@@ -9,7 +9,7 @@ public interface TransacaoRepository extends CrudRepository<Transacao, Integer> 
 
     List<Transacao> findAll();
 
-    Transacao findById(String id);
+    Transacao findById(int id);
 
     void delete(Transacao transacao);
 

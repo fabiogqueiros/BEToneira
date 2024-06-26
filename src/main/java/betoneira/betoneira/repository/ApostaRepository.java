@@ -9,7 +9,7 @@ public interface ApostaRepository extends CrudRepository<Aposta, Integer>{
 
     List<Aposta> findAll();
 
-    Aposta findById(String id);
+    Aposta findById(int id);
 
     void delete(Aposta aposta);
 
@@ -17,3 +17,20 @@ public interface ApostaRepository extends CrudRepository<Aposta, Integer>{
 
 
 }
+
+
+
+//public class ApostaService{
+//
+//    List<Aposta> findAll();
+//
+//    Aposta findById(int id);
+//
+//    void delete(Aposta aposta);
+//
+//    <temporaryAposta extends Aposta> temporaryAposta save(temporaryAposta aposta);
+//
+//
+//}
+
+

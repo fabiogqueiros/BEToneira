@@ -9,7 +9,7 @@ public interface ConquistaRepository extends CrudRepository<Conquista, Integer> 
 
     List<Conquista> findAll();
 
-    Conquista findById(String id);
+    Conquista findById(int id);
 
     void delete(Conquista conquista);
 

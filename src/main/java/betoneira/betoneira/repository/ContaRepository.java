@@ -9,7 +9,7 @@ public interface ContaRepository extends CrudRepository<Conta, Integer> {
 
     List<Conta> findAll();
 
-    Conta findById(String id);
+    Conta findById(int id);
 
     void delete(Conta conta);
 

@@ -41,6 +41,7 @@ public class Loteria extends Jogos{
     public Integer[] getNumerosValidos(){
         return this.numerosValidos;
     }
+
     public void encerrarJogo(){
         Integer numero = this.sorteia();
         this.bilhetes.forEach((key, value) -> {
@@ -51,6 +52,7 @@ public class Loteria extends Jogos{
                 else apt.encerrarAposta(numero);
         };});
     }
+
     public Integer calcularMultiplicador(){
         //Implements Method
         return 1;

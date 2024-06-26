@@ -9,7 +9,7 @@ public interface ContaBancariaRepository extends CrudRepository<ContaBancaria, I
 
     List<ContaBancaria> findAll();
 
-    ContaBancaria findById(String id);
+    ContaBancaria findById(int id);
 
     void delete(ContaBancaria contaBancaria);
 
