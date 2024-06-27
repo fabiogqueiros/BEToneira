@@ -13,16 +13,12 @@ import lombok.Setter;
 public class Transacao {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id")
     @Getter private int id;
 
-    @Column(name= "tipo")
     @Getter @Setter private String tipo;
 
-    @Column(name="quantia")
     @Getter @Setter private float quantia;
 
-    @Column(name="modo")
     @Getter @Setter private String modo;
 
 

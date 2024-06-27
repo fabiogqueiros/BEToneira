@@ -35,7 +35,7 @@ public class TransacaoController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody Transacao deleteProductById(@PathVariable int id) {
+    public @ResponseBody Transacao deleteTransacaoById(@PathVariable int id) {
         Transacao transacao = repository.findById(id);
         if (transacao == null) {
             return null;

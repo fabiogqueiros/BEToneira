@@ -2,9 +2,11 @@ package betoneira.betoneira.repository;
 
 import betoneira.betoneira.model.Aposta;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ApostaRepository extends CrudRepository<Aposta, Integer>{
 
     List<Aposta> findAll();

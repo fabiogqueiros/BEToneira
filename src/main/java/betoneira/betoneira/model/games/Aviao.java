@@ -1,5 +1,9 @@
 package betoneira.betoneira.model.games;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import org.springframework.stereotype.Component;
+
 public class Aviao extends Jogos{
     private Integer tempo;
     private String estado;

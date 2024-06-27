@@ -1,10 +1,30 @@
 package betoneira.betoneira.model.bank;
 
-public class ContaBancaria {
-    private float saldo;
-    private Transacao historico;
 
-    
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+
+@Entity
+@Table(name="contaBancaria")
+@NoArgsConstructor
+public class ContaBancaria {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    private int id;
+
+    @Getter @Setter
+    private float saldo;
+
+    @OneToMany @Getter @Setter
+    private List<Transacao> historico;
+
+
     public void fazerTransacaoInterna(float saldo){
         //Implemnents Method
     }

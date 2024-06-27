@@ -2,9 +2,11 @@ package betoneira.betoneira.repository;
 
 import betoneira.betoneira.model.bank.ContaBancaria;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ContaBancariaRepository extends CrudRepository<ContaBancaria, Integer> {
 
     List<ContaBancaria> findAll();
