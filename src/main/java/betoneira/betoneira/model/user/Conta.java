@@ -19,7 +19,10 @@ public class Conta {
     private int id;
 
     @Getter @Setter
-    private String username;
+    private String nome;
+
+    @Getter @Setter
+    private String senha;
 
     @Getter @Setter
     private String email;

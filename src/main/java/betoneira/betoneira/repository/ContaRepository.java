@@ -13,6 +13,8 @@ public interface ContaRepository extends CrudRepository<Conta, Integer> {
 
     Conta findById(int id);
 
+    Conta findByNome(String nome);
+
     void delete(Conta conta);
 
     <temporaryConta extends Conta> temporaryConta save(temporaryConta conta);

@@ -24,6 +24,21 @@ public class ContaController {
         return repository.findById(id);
     }
 
+    @RequestMapping(value = "/nome", method = RequestMethod.GET)
+    public @ResponseBody Conta getContaByNome(@RequestBody Conta conta) {
+        Conta contaAtual = repository.findByNome(conta.getNome());
+        if (contaAtual == null) {
+            return null;
+        } else {
+            if (conta.getSenha().equals(contaAtual.getSenha())) {
+                return contaAtual;
+            }
+            return null;
+        }
+    }
+
+
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public @ResponseBody Conta createConta(@RequestBody Conta conta) {
         return repository.save(conta);
