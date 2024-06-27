@@ -24,16 +24,16 @@ public class ContaController {
         return repository.findById(id);
     }
 
-    @RequestMapping(value = "/nome", method = RequestMethod.GET)
-    public @ResponseBody Conta getContaByNome(@RequestBody Conta conta) {
-        Conta contaAtual = repository.findByNome(conta.getNome());
+    @RequestMapping(value = "/nome", params = {"nome", "senha"}, method = RequestMethod.GET)
+    public @ResponseBody Boolean authenticateConta(@RequestParam("nome") String nome, @RequestParam("senha") String senha) {
+        Conta contaAtual = repository.findByNome(nome);
         if (contaAtual == null) {
-            return null;
+            return false;
         } else {
-            if (conta.getSenha().equals(contaAtual.getSenha())) {
-                return contaAtual;
+            if (contaAtual.getSenha().equals(senha)) {
+                return true;
             }
-            return null;
+            return false;
         }
     }
 
