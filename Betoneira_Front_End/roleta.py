@@ -3,6 +3,7 @@ from PPlay.sprite import *
 from math import *
 from PPlay.mouse import *
 import sys
+from random import randint
 
 def roleta(tipo, opt, email, quantia, odd):
     retorno = False
@@ -116,7 +117,7 @@ def telaResultado(janela, ganhou, quantia, odd):
 # requisição
 
 def getResultadoRoleta(tipo, opt, email, quantia):
-    return 1
+    return randint(1, 9)
 
 
 

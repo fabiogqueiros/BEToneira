@@ -2,6 +2,7 @@ from PPlay.window import *
 from PPlay.sprite import *
 from PPlay.mouse import *
 import sys
+from random import randint
 
 def aviao(quantia, email):
     janela = Window(1280, 720)
@@ -19,7 +20,7 @@ def aviao(quantia, email):
     sair.set_position(1180 - sair.width, janela.height - 200)
     aptnov.set_position(1180 - aptnov.width, janela.height - 100)
     velFundo = 40
-    velAviao = 60
+    velAviao = 90
     meio = False
     dy = janela.height / janela.width
     dx = 1
@@ -31,8 +32,9 @@ def aviao(quantia, email):
     tempoAcumulado = 0
     crash = False
     multiplicadorReal = 1
+    tempoDeParada = randint(2, 60)
     while True:
-        if tempoAcumulado > 10:
+        if tempoAcumulado > tempoDeParada:
             crash = True
         multiplicador = função(tempoAcumulado)
         fundo.draw()
@@ -65,7 +67,7 @@ def aviao(quantia, email):
         elif not parou:
             aviao.x += dx*velAviao*janela.delta_time()
             aviao.y -= dy*velAviao*janela.delta_time()
-            if janela.width/2 - 5 < aviao.x + aviao.width/2 < janela.width/2 + 5 and janela.height/2 - 30 < aviao.y + aviao.height/2 < janela.height/2 + 30:
+            if janela.width/2 - 6 < aviao.x + aviao.width/2 < janela.width/2 + 6 and janela.height/2 - 30 < aviao.y + aviao.height/2 < janela.height/2 + 30:
                 meio = True
                 começar(email, quantia)
             aviao.draw()

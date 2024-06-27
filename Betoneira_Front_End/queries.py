@@ -1,7 +1,9 @@
 from random import randint
+import requests
 
 def autentica(login, senha):
-    return True
+    params = {'login': login, 'senha': senha}
+    return requests.get("http://localhost:8080/conta/nome", params=params)
 
 def cadastra(email, username, nickname, senha, confirmação):
     return True
