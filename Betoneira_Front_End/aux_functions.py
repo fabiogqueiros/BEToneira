@@ -1,3 +1,5 @@
+from queries import quantiaValida
+
 def getInput(options):
     n = len(options)
     opt = -1
@@ -119,3 +121,20 @@ def getEmail():
 
 def emailCorreto(email):
     return True
+
+def getQuantia():
+    while True:
+        ipt = input("Quanto gostaria de apostar? V$")
+        valid = True
+        try:
+            ipt = float(ipt)
+        except:
+            valid = False
+        req = quantiaValida(ipt)
+        if req and valid:
+            return ipt
+        else:
+            print("Quantia selecionada é maior que o saldo da conta.")
+            opt = getInput(["Tentar de novo", "Voltar"])
+            if opt == 2:
+                return 0

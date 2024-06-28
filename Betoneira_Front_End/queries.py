@@ -41,9 +41,6 @@ def geraHistorico(email, filtros):
 def geraRanking(opt):
     print("\n<<<Aqui ficaria o ranking>>>\n")
 
-def getQuantia():
-    return 200
-
 def getOdd(param, tipo):
     return 1.85
 
@@ -58,3 +55,6 @@ def getLoteriaInfo():
 
 def getLoteriaResultados(email):
     return [24, 0]
+
+def quantiaValida(quantia):
+    return True
