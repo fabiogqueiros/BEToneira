@@ -3,6 +3,8 @@ package betoneira.betoneira.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class Roleta extends Jogos{
     private String cores[];
@@ -17,12 +19,13 @@ public class Roleta extends Jogos{
         //Adicionar as cores e numeros
     }
     public int sorteia(){//Duvida real se como vai ser o tipo de retorno
-        int numero = Math.random(numeros.length) + 1;
+        Random sort = new Random();
+        int numero = sort.nextInt(numeros.length) + 1;
         return numero;
     }
     public void encerrarJogo(){
         corEscolhida = null;
-        numeroEscolhido = null;
+        //numeroEscolhido = null;
         colorsNumbers = null;
         System.out.println("Encerrado o jogo!");
     }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import betoneira.betoneira.interfaces.InterfaceSorteio;
 import betoneira.betoneira.model.Aposta;
@@ -16,7 +17,7 @@ public class Loteria extends Jogos{
     private LocalTime fim;
     private static Loteria loteria;
     private Map<Integer, List<Aposta>> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
-    //private InterfaceSorteio sorteio;
+    private InterfaceSorteio sorteio;
     private int[] numerosValidos;//Atualizar o diagrama de classes
 
     private Loteria(int qtdeNum, int minutes){//Completar a inicializacao dos atributos
@@ -44,7 +45,8 @@ public class Loteria extends Jogos{
         this.sorteio = new SorteioInteiro();
     }
     public int sorteia(){
-        int numero = Math.random(numerosValidos.length) + 1;// this.sorteio.sorteia(this.numerosValidos[0], this.numerosValidos[numerosValidos.length-1]);
+        Random sort = new Random();
+        int numero = sort.nextInt(numerosValidos.length) + 1;//Math.random(numerosValidos.length) + 1;// this.sorteio.sorteia(this.numerosValidos[0], this.numerosValidos[numerosValidos.length-1]);
         return numero;
     }
     public void addBilhetes(Aposta aposta, int numero){//Adicionando observadores aqui
@@ -61,7 +63,7 @@ public class Loteria extends Jogos{
         LocalTime now = LocalTime.now();
         int temp = now.getMinute();
         //Uma checagem se chegou o minuto de fechar o sorteio
-        if(temp != this.fim) return;
+        if(temp != this.fim.getMinute()) return;
 
         int numero = this.sorteia();
         this.bilhetes.forEach((key, value) -> {

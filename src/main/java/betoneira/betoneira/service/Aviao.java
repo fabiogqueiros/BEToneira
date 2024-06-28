@@ -16,7 +16,7 @@ public class Aviao extends Jogos{
     //@Override
     public void iniciarJogo(){
         this.estado = "Voando";
-        LocalTime now = 0.0;
+        //LocalTime now = 0.0;
         this.multiplicadorAtual = (float) 0.0;
     }
     public void parar(){
