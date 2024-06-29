@@ -7,6 +7,7 @@ import requests
 
 
 #  -------------------- login, cadastro, rec senha -------------------------------
+# tá faltando pedir as opções de recuperação ainda
 
 def autentica(login, senha):
     params = {'nome': login, 'senha': senha}
@@ -47,7 +48,7 @@ def getChave(email, valor):  # -- a checar se vai ser assim mesmo --
     return "PIXDOFABIO"
 
 # -----------------------------Consultas------------------------------
-# tá faltando documentar só essa parte, o resto todo tá liberado
+# tá faltando documentar essa parte ainda
 
 def geraExtrato(email, filtros):  # envio filtros e quero receber uma string formatada do extrato, ou então uma lista das entradas do extrato para futura formatação (retorno: String ou [String])
     print("\n<<<Aqui ficaria o extrato>>>\n") # ainda vou botar mais detalhes sobre os filtros, tanto pra essa função quanto pras 2 abaixo.
