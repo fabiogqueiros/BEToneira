@@ -20,19 +20,15 @@ def alterarSenha():
 def editarPerfil():
     global email
     while True:
-        opt = getInput(["Alterar Username", "Alterar Nickname", "Alterar Senha", "Voltar"])
+        opt = getInput(["Alterar Username", "Alterar Senha", "Voltar"])
         if opt == 1:
-            novo = input("Novo Username: ")  #é possível fazer mais tratamento aqui
+            novo = input("Novo Username: ")
             check = alteraUsername(email, novo)
             if check:
                 print("Username atualizado com sucesso!")
             else:
                 print("Esse Username já está sendo usado.")
         elif opt == 2:
-            novo = input("Novo Nickname: ")
-            alteraNickname(email, novo)
-            print("Nickname alterado com sucesso!")
-        elif opt == 3:
             alterarSenha()
         else:
             break
@@ -52,8 +48,9 @@ def loteria():
     while True:
         estado = getEstadoLoteria(email)
         if estado == 1:
-            numeros = getNumeros(1, 30)
-            quantia = getQuantia()
+            numValid = getNumerosValidos()
+            numeros = getNumeros(numValid[0], numValid[1])
+            quantia = getQuantia(email)
             odd = getOdd(numeros, 'loteria')
             print(f"ODD: {odd}")
             opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
@@ -79,7 +76,7 @@ def loteria():
 def aviaoSetup():
     global email
     while True:
-        quantia = getQuantia()
+        quantia = getQuantia(email)
         opt = getInput(["Confirmar e Iniciar", "Cancelar e voltar"])
         if opt == 1:
             cont = subprocess.run(['python', 'aviao.py', f"{quantia}", f"{email}"]).returncode
@@ -108,8 +105,9 @@ def numero(quantia):
     return 1
 
 def roletaSetup():
+    global email
     while True:
-        quantia = getQuantia()
+        quantia = getQuantia(email)
         opt = getInput(["Cor", "Número"])
         if opt == 1:
             cont = cor(quantia)
@@ -233,10 +231,9 @@ def cadastrar():
     while True:
         email = input("Email: ")
         username = input("Username: ")
-        nickname = input("Nickname: ")
         senha = input("Senha: ")
         confirmação = input("Senha Novamente: ")
-        if cadastra(email, username, nickname, senha, confirmação):
+        if cadastra(email, username, senha, confirmação):
             print("Cadastrado com sucesso!")
             break
         else:

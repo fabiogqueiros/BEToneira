@@ -122,7 +122,7 @@ def getEmail():
 def emailCorreto(email):
     return True
 
-def getQuantia():
+def getQuantia(email):
     while True:
         ipt = input("Quanto gostaria de apostar? V$")
         valid = True
@@ -130,7 +130,7 @@ def getQuantia():
             ipt = float(ipt)
         except:
             valid = False
-        req = quantiaValida(ipt)
+        req = quantiaValida(ipt, email)
         if req and valid:
             return ipt
         else:
