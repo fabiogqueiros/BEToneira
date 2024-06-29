@@ -4,6 +4,7 @@ from math import *
 from PPlay.mouse import *
 import sys
 from random import randint
+from queries import getResultadoRoleta
 
 def roleta(tipo, opt, email, quantia, odd):
     retorno = False
@@ -112,13 +113,6 @@ def telaResultado(janela, ganhou, quantia, odd):
         janela.update()
         signal = False
     return retorno
-
-
-# requisição
-
-def getResultadoRoleta(tipo, opt, email, quantia):
-    return randint(1, 9)
-
 
 
 tipo = sys.argv[1]

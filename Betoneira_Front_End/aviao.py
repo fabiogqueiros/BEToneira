@@ -3,6 +3,7 @@ from PPlay.sprite import *
 from PPlay.mouse import *
 import sys
 from random import randint
+from queries import começar, crashou, pararReq
 
 def aviao(quantia, email):
     janela = Window(1280, 720)
@@ -48,7 +49,7 @@ def aviao(quantia, email):
         if meio and not parou and not crash:
             if signal and (parar.x < positionx < parar.x + parar.width) and (parar.y < positiony < parar.y + parar.height):
                     parou = True
-                    #multiplicadorReal = getMultiplicadorReal(email)  #É o que é pra acontecer de fato
+                    #multiplicadorReal = pararReq(email)  #É o que é pra acontecer de fato
                     multiplicadorReal = multiplicador  # Fake
             tempoAcumulado += janela.delta_time()
             parar.draw()
@@ -96,18 +97,6 @@ def aviao(quantia, email):
 
 def função(x):
     return x**(2) / 300 + 1
-
-def começar(email, quantia):
-    pass
-
-def crashou():  #lógica fake. aqui estaria a requisição.
-    l = [False, False, False, False, False, False, False, False, False, False, False, False, True, False]
-    n = len(l)
-    i = randint(0, n-1)
-    return l[i]
-
-def getMultiplicadorReal(email):
-    return 1.24
 
 
 quantia = float(sys.argv[1])

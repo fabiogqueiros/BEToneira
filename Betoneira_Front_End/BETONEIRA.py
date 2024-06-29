@@ -2,25 +2,45 @@ from queries import *
 from aux_functions import *
 import subprocess
 
+email = ''
+
 def alterarSenha():
     global email
     while True:
         antiga = input("Senha Antiga: ")
-        aut = verificaSenha(email, antiga)
-        if aut:
-            nova = input("Nova Senha: ")
-            alteraSenha(email, nova)
+        nova = input("Nova Senha: ")
+        deuCerto = alteraSenha(email, antiga, nova)
+        if deuCerto:
+            print("Senha alterada com sucesso!")
             break
         else:
-            print("Senha incorreta!")
             opt = getInput(["Tentar de novo", "Voltar"])
             if opt == 2:
                 break
+    
+def excluirConta():
+    global email
+    while True:
+        senha = input("Insira sua senha: ")
+        print("Tem certeza que deseja excluir a conta?")
+        opt = getInput(["Sim", "Não"]) 
+        if opt == 1:
+            deuCerto = excluiConta(email, senha)
+            if deuCerto:
+                print("Conta excluída com sucesso!")
+                exit()
+            else:
+                print("Senha errada.")
+                opt = getInput(["Tentar de novo", "Voltar"])
+                if opt == 2:
+                    break
+        else:
+            break
 
 def editarPerfil():
     global email
     while True:
-        opt = getInput(["Alterar Username", "Alterar Senha", "Voltar"])
+        opt = getInput(["Alterar Username", "Alterar Senha", "Excluir Conta", "Voltar"])
         if opt == 1:
             novo = input("Novo Username: ")
             check = alteraUsername(email, novo)
@@ -30,6 +50,8 @@ def editarPerfil():
                 print("Esse Username já está sendo usado.")
         elif opt == 2:
             alterarSenha()
+        elif opt == 3:
+            excluirConta()
         else:
             break
 
@@ -43,13 +65,42 @@ def perfil():
         else:
             break
 
+def getNumerosLoteria(ini, fim, qtd):
+    n1 = n2 = -1
+    while True:
+        ipt = input(f"Digite um número entre {ini} e {fim}: ")
+        try:
+            if ini < int(ipt) < fim:
+                n1 = int(ipt)
+                break
+            else:
+                print("Algo deu errado. Tente novamente.")
+        except:
+            print("Algo deu errado. Tente novamente.")
+    while qtd == 2:
+        ipt = input(f"Digite um número entre {ini} e {fim} diferente de {n1}: ")
+        try:
+            if ini < int(ipt) < fim and n1 != int(ipt):
+                n2 = int(ipt)
+                break
+            else:
+                print("Algo deu errado. Tente novamente.")
+        except:
+            print("Algo deu errado. Tente novamente.")
+    if qtd == 1:
+        return (n1)
+    else:
+        return (n1, n2)
+
 def loteria():
     global email
     while True:
         estado = getEstadoLoteria(email)
         if estado == 1:
             numValid = getNumerosValidos()
-            numeros = getNumeros(numValid[0], numValid[1])
+            print("Quantos números quer apostar?")
+            qtd = getInput(["1", "2"])
+            numeros = getNumerosLoteria(numValid[0], numValid[1], qtd)
             quantia = getQuantia(email)
             odd = getOdd(numeros, 'loteria')
             print(f"ODD: {odd}")
@@ -67,8 +118,8 @@ def loteria():
             break
         elif estado == 3:
             resultados = getLoteriaResultados(email)
-            print(f"O número sorteado foi {resultados[0]}")
-            print(f"Você ganhou V${resultados[1]}")
+            print(f"Os números sorteados foram {resultados[0]} e {resultados[1]}")
+            print(f"Você ganhou V${resultados[2]}")
             opt = getInput(["Apostar Novamente", "Sair"])
             if opt == 2:
                 break
