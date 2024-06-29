@@ -1,4 +1,5 @@
 package betoneira.betoneira.service;
+import java.util.Random;
 
 public class Aviao extends Jogos{
     private float tempo;
@@ -18,7 +19,7 @@ public class Aviao extends Jogos{
     }
     private void aviaoSobe(){//No diagrama esta como publico, nao acho que deve ser isso
         this.multiplicadorAtual = this.calcularMultiplicador();
-        if(multiplicadorAtual > super.multiplicador){
+        if(this.sorteia() == 0){//Aviao perdeu
             this.aviaoCrash();
         }
         this.tempo+=0.1;
@@ -35,11 +36,19 @@ public class Aviao extends Jogos{
         return this.multiplicadorAtual * 10/100;
     }
 
-    /*public int sorteia(){
+    public int sorteia(){
+        int numSort = 60;
+        if(multiplicadorAtual > super.multiplicador /3 * 2) numSort = 10;//Diminuindo a chance de ganhar
+        if(multiplicadorAtual > super.multiplicador /4 * 3) numSort = 8;
+        
         Random sort = new Random();
-        //int numero = sort.nextInt(2);
-        int numero = sort.nextInt(60);
-        if(numero > 30) return 1;
+        int numero = sort.nextInt(numSort);
+        if(numero > 5) return 1;
         return 0;
-    }*/
+    }
+
+    public boolean consultaEstado(){
+        if(estado == "caiu") return false;
+        return true;
+    }
 }

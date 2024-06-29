@@ -13,7 +13,7 @@ public abstract class Jogos {
     
     public abstract void encerrarJogo();
 
-    //public abstract int sorteia();
+    public abstract int sorteia();
 
     public abstract float calcularMultiplicador();
 }
