@@ -8,8 +8,14 @@ def autentica(login, senha):
 def cadastra(email, username, nickname, senha, confirmação):
     return True
 
-def enviarCodigo(email):
-    return '40028922'
+def solicitarRecuperação(email):
+    pass
+
+def confirmarEmail(codigo, email):
+    return True
+
+def escolherNovaSenha(senha, email):
+    pass
 
 def geraPerfil(email):
     print("\n<<<Aqui ficaria o perfil>>>\n")

@@ -247,11 +247,12 @@ def cadastrar():
 
 def recuperarSenha():
     email = getEmail()
-    cod = enviarCodigo(email)   # vê melhor quem verifica o cod e jogar o "nova" pro servidor
+    solicitarRecuperação(email)
     while True:
         codigo = input("Digite o código enviado para o seu email: ")
-        if codigo == cod:
+        if confirmarEmail(codigo, email):
             nova = input("Digite sua nova senha: ")
+            escolherNovaSenha(nova, email)
             print("Senha definida com sucesso!")
             break
         else:

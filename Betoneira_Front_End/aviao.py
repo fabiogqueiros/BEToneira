@@ -32,10 +32,11 @@ def aviao(quantia, email):
     tempoAcumulado = 0
     crash = False
     multiplicadorReal = 1
-    tempoDeParada = randint(2, 60)
+    tempoDeCheck = 0
     while True:
-        if tempoAcumulado > tempoDeParada:
-            crash = True
+        if tempoAcumulado > tempoDeCheck:
+            tempoDeCheck += 1
+            crash = crashou()
         multiplicador = função(tempoAcumulado)
         fundo.draw()
         if not mouseClicked and mouse.is_button_pressed(1):
@@ -98,6 +99,12 @@ def função(x):
 
 def começar(email, quantia):
     pass
+
+def crashou():  #lógica fake. aqui estaria a requisição.
+    l = [False, False, False, False, False, False, False, False, False, False, False, False, True, False]
+    n = len(l)
+    i = randint(0, n-1)
+    return l[i]
 
 def getMultiplicadorReal(email):
     return 1.24
