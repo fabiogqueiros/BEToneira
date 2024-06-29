@@ -6,7 +6,6 @@ import java.util.Map;
 
 import betoneira.betoneira.interfaces.InterfaceSorteio;
 import betoneira.betoneira.model.Aposta;
-import betoneira.betoneira.model.random.SorteioInteiro;
 
 public class Loteria extends Jogos{
     private Date inicio;
@@ -25,7 +24,6 @@ public class Loteria extends Jogos{
     }
     //@Override
     public void iniciarJogo(){
-        this.sorteio = new SorteioInteiro();
         //Implement Method
     }
     public Integer sorteia(){//Acho que aqui vai virar uma funcao void, levado em conta o padrao GoF Observer (Correcao, fica a mesma coisa, observer ficou em encerrarJogo)

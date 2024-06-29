@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import betoneira.betoneira.interfaces.InterfaceSorteio;
 import betoneira.betoneira.model.Aposta;
-import betoneira.betoneira.model.random.SorteioInteiro;
 
 public class Loteria extends Jogos{
     private LocalTime inicio;
@@ -17,7 +15,6 @@ public class Loteria extends Jogos{
     private static Loteria loteria;
     private Map<Integer, List<Aposta>> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
     private int[] numerosValidos;//Atualizar o diagrama de classes
-    private InterfaceSorteio sorteio;
 
     private Loteria(int qtdeNum, int minutes){//Completar a inicializacao dos atributos
         this.inicio = LocalTime.now();
@@ -40,7 +37,7 @@ public class Loteria extends Jogos{
     }
     //@Override
     public void iniciarJogo(){
-        this.sorteio = new SorteioInteiro();
+        System.out.println("Inicio o jogo!");
     }
     public int sorteia(){
         Random sort = new Random();
@@ -53,10 +50,17 @@ public class Loteria extends Jogos{
         num1 = num1 * 100 + num2;
         return num1;
     }
-    public void addBilhetes(Aposta aposta, int numero){//Adicionando observadores aqui
-        List<Aposta> temp = this.bilhetes.get(numero);
+    public void addObserver(Aposta aposta, int[] numero){//Adicionando observadores aqui
+        if(numero.length == 2){//Foi passado dois numeros para aposta
+            this.bilhetes.get(numero[2]);
+            List<Aposta> temp = this.bilhetes.get(numero[2]);
+            temp.add(aposta);
+            this.bilhetes.put(numero[2], temp);
+        }
+        this.bilhetes.get(numero[1]);
+        List<Aposta> temp = this.bilhetes.get(numero[1]);
         temp.add(aposta);
-        this.bilhetes.put(numero, temp);
+        this.bilhetes.put(numero[1], temp);
         this.multiplicador += this.calcularMultiplicador();//Atualizando o multiplicador
     }
     public int[] getNumerosValidos(){
@@ -65,25 +69,29 @@ public class Loteria extends Jogos{
 
     public void encerrarJogo(){
         LocalTime now = LocalTime.now();
-        int temp = now.getMinute();
         //Uma checagem se chegou o minuto de fechar o sorteio
-        if(temp != this.fim.getMinute()) return;
+        if(now.isBefore(fim)) return;
         //Hora de checar os vencedores
         int numero = this.sorteia();
         String numeroStr = Integer.toString(numero);
+        List<Aposta> verificado = new ArrayList<Aposta>();
         for(int i = 0;i<3;i++){
-        this.bilhetes.forEach((key, value) -> {
-            String valueStr = Integer.toString(key);
-            for (Aposta apt : value) {
-                if(numeroStr.contains(valueStr)){//Fazer talvez um tratamento de voltar o multiplicador relativo a cada aposta (desacoplando aposta de Loteria)
-                    apt.encerrarAposta(this.multiplicador);
-                }
-                else apt.encerrarAposta(0);//Ta certo? Faz sentido?
-        };});
+            this.bilhetes.forEach((key, value) -> {
+                String valueStr = Integer.toString(key);
+                for (Aposta apt : value) {
+                    //Aposta ja recebeu o seu multiplicador
+                    if(verificado.contains(apt)) continue;
+                    verificado.add(apt);
+
+                    if(numeroStr.contains(valueStr)){//Fazer talvez um tratamento de voltar o multiplicador relativo a cada aposta (desacoplando aposta de Loteria)
+                        apt.encerrarAposta(this.multiplicador);
+                    }
+                    else apt.encerrarAposta(0);//Ta certo? Faz sentido?
+                };
+            });
         };
         Loteria.loteria = null;
         this.bilhetes = null;
-        this.sorteio = null;
         this.numerosValidos = null;
     }
 
