@@ -1,16 +1,14 @@
 package betoneira.betoneira.model.recovery;
 
-public class NotificacaoEmail extends Notificacao{
+public class NotificacaoEmail{
 
-    protected String email;
+    private final String email;
 
     public NotificacaoEmail(String email){
-
         this.email = email;
     }
 
-    public void enviaCodigo(String codigo){
-
-        System.out.println("Uau! Te enviamos um email !!");
+    public String getEmail() {
+        return email;
     }
 }

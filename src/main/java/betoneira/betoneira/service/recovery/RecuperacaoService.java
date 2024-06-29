@@ -2,7 +2,6 @@ package betoneira.betoneira.service.recovery;
 
 import java.util.Map;
 
-import betoneira.betoneira.model.recovery.Notificacao;
 import betoneira.betoneira.model.recovery.NotificacaoCorreio;
 import betoneira.betoneira.model.recovery.NotificacaoEmail;
 import betoneira.betoneira.model.recovery.NotificacaoSMS;
@@ -23,16 +22,17 @@ public class RecuperacaoService {
     public void enviaCodigo(int seed, Map<String, Boolean> options, Map<String, String> args){
 
         r.setCodigo(geraCodigo(seed));
+        String login = r.getLogin();
 
-        Notificacao n = new NotificacaoEmail(args.get(r.getLogin()));
+        NotificacaoService ns = new EmailService(new NotificacaoEmail(args.get(login)));
 
         if (options.get("sms")){
-            n = new NotificacaoSMS(n, args.get("sms"));
+           ns = new SMService(ns, new NotificacaoSMS(args.get("sms")));
         }
         if (options.get("correio")){
-            n = new NotificacaoCorreio(n, args.get("correio"));
+            ns = new CorreioService(ns, new NotificacaoCorreio(args.get("correio")));
         }
-        n.enviaCodigo(r.getCodigo());
+        ns.enviaCodigo(r.getCodigo());
     }
 
     public boolean verificaCodigo(String codigo){

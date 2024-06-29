@@ -1,17 +1,15 @@
 package betoneira.betoneira.model.recovery;
 
-public class NotificacaoCorreio extends DecoratorBase{
+public class NotificacaoCorreio{
     
-    private String endereco;
+    private final String endereco;
 
-    public NotificacaoCorreio(Notificacao n, String endereco){
-        super(n);
+    public NotificacaoCorreio(String endereco){
         this.endereco = endereco;
     }
 
-    @Override
-    public void enviaCodigo(String codigo){
-        super.enviaCodigo(codigo);
-        System.out.println("Uau! Te enviamos um sedex com o código");
+    public String getEndereco() {
+        return endereco;
     }
+
 }

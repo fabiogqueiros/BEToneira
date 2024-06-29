@@ -1,17 +1,15 @@
 package betoneira.betoneira.model.recovery;
 
-public class NotificacaoSMS extends DecoratorBase{
+public class NotificacaoSMS{
     
     String tel;
 
-    public NotificacaoSMS(Notificacao n, String tel){
-        super(n);
+    public NotificacaoSMS(String tel){
         this.tel = tel;
     }
 
-    @Override
-    public void enviaCodigo(String codigo){
-        super.enviaCodigo(codigo);
-        System.out.println("Uau!! Te enviamos um SMS !!");
+    public String getTel() {
+        return tel;
     }
+
 }
