@@ -52,15 +52,15 @@ public class Loteria extends Jogos{
     }
     public void addObserver(Aposta aposta, int[] numero){//Adicionando observadores aqui
         if(numero.length == 2){//Foi passado dois numeros para aposta
-            this.bilhetes.get(numero[2]);
+            this.bilhetes.get(numero[1]);
             List<Aposta> temp = this.bilhetes.get(numero[2]);
             temp.add(aposta);
-            this.bilhetes.put(numero[2], temp);
+            this.bilhetes.put(numero[1], temp);
         }
-        this.bilhetes.get(numero[1]);
+        this.bilhetes.get(numero[0]);
         List<Aposta> temp = this.bilhetes.get(numero[1]);
         temp.add(aposta);
-        this.bilhetes.put(numero[1], temp);
+        this.bilhetes.put(numero[0], temp);
         this.multiplicador += this.calcularMultiplicador();//Atualizando o multiplicador
     }
     public int[] getNumerosValidos(){
