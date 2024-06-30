@@ -43,6 +43,8 @@ def excluiConta(email, senha):  # checa se a senha está correta e, se sim, excl
 # ----------------------------Saque e Depósito----------------------------
 
 def fazerSaque(valor, senha, banco, conta, email):  # envio as informações e quero receber se o saque foi bem sucedido ou não
+    body = {"tipo": "Saque", "quantia": valor}
+    a = requests.post("http://localhost:8080/transacao/", data=body)
     return True
 
 def getChave(email, valor):  # não sei se vai ficar assim mesmo, mas eu envio um valor e espero receber uma chave pix pra fazer o depósito (retorno: String)

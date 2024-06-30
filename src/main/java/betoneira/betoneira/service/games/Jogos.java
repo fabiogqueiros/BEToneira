@@ -1,4 +1,4 @@
-package betoneira.betoneira.service;
+package betoneira.betoneira.service.games;
 
 import betoneira.betoneira.model.Aposta;
 

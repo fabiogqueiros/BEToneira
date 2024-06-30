@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Loteria extends Jogos{
     private LocalTime inicio;
     private LocalTime fim;
-    private static betoneira.betoneira.service.jogos.Loteria loteria;
+    private static betoneira.betoneira.service.games.Loteria loteria;
     private Map<Integer, List<Aposta>> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
     private int[] numerosValidos;//Atualizar o diagrama de classes
 

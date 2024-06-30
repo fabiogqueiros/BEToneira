@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name= "transacao")
@@ -21,11 +25,14 @@ public class Transacao {
 
     @Getter @Setter private String modo;
 
+    @Getter @Setter private LocalDate dataTransacao;
+
 
     public Transacao(String tipo, float quantia, String modo) {
         this.tipo = tipo;
         this.quantia = quantia;
         this.modo = modo;
+        this.dataTransacao = LocalDate.now();
     }
 
 }

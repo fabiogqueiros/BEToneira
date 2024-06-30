@@ -1,4 +1,4 @@
-package betoneira.betoneira.service.jogos;
+package betoneira.betoneira.service.games;
 
 import java.util.List;
 

@@ -1,10 +1,13 @@
 package betoneira.betoneira.controller.bank;
 
 import betoneira.betoneira.model.bank.Transacao;
-import betoneira.betoneira.repository.TransacaoRepository;
+import betoneira.betoneira.service.bank.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -12,39 +15,36 @@ import java.util.List;
 public class TransacaoController {
 
     @Autowired
-    private TransacaoRepository repository;
+    private TransacaoService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public @ResponseBody List<Transacao> getTransacoes() {
-        return repository.findAll();
+        return service.getTransacoes();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody Transacao getTransacaoById(@PathVariable int id) {
-        return repository.findById(id);
+        return service.getTransacaoById(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public @ResponseBody Transacao createTransacao(@RequestBody Transacao transacao) {
-        return repository.save(transacao);
+        return service.createTransacao(transacao);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public @ResponseBody Transacao updateTransacao(@RequestBody Transacao transacao) {
-        return repository.save(transacao);
+        return service.updateTransacao(transacao);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody Transacao deleteTransacaoById(@PathVariable int id) {
-        Transacao transacao = repository.findById(id);
-        if (transacao == null) {
-            return null;
-        } else {
-            repository.delete(transacao);
-            return transacao;
-        }
+        return service.deleteTransacaoById(id);
     }
 
-
+    @RequestMapping(value = "/filter", params = {"dataInicio", "dataFim"}, method = RequestMethod.GET)
+    public @ResponseBody List<Transacao> getTransacaoWithFilter(@RequestParam("dataInicio") String inicio, @RequestParam("dataFim") String fim) {
+        return service.getTransacaoWithFilter(inicio, fim);
+    }
 
 }

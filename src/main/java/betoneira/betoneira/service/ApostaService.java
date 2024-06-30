@@ -13,23 +13,23 @@ public class ApostaService {
     @Autowired
     private ApostaRepository repository;
 
-    public @ResponseBody List<Aposta> getApostas() {
+    public List<Aposta> getApostas() {
         return repository.findAll();
     }
 
-    public @ResponseBody Aposta getApostaById(@PathVariable int id) {
+    public Aposta getApostaById(int id) {
         return repository.findById(id);
     }
 
-    public @ResponseBody Aposta createAposta(@RequestBody Aposta aposta) {
+    public Aposta createAposta(Aposta aposta) {
         return repository.save(aposta);
     }
 
-    public @ResponseBody Aposta updateAposta(@RequestBody Aposta aposta) {
+    public Aposta updateAposta(Aposta aposta) {
         return repository.save(aposta);
     }
 
-    public @ResponseBody Aposta deleteApostaById(@PathVariable int id) {
+    public Aposta deleteApostaById(int id) {
         Aposta aposta = repository.findById(id);
         if (aposta == null) {
             return null;

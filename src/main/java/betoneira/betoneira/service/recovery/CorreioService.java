@@ -3,7 +3,6 @@ package betoneira.betoneira.service.recovery;
 import betoneira.betoneira.model.recovery.NotificacaoCorreio;
 import org.springframework.stereotype.Service;
 
-@Service
 public class CorreioService extends DecoratorService{
     
     private final NotificacaoCorreio nc;
