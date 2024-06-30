@@ -48,6 +48,8 @@ def fazerSaque(valor, senha, banco, conta, email):  # envio as informações e q
     return True
 
 def getChave(email, valor):  # não sei se vai ficar assim mesmo, mas eu envio um valor e espero receber uma chave pix pra fazer o depósito (retorno: String)
+    body = {"tipo": "Saque", "quantia": valor, "modo": "Esperando Pagamento"}
+    a = requests.post("http://localhost:8080/transacao/", data=body)
     return "PIXDOFABIO"
 
 # -----------------------------Consultas------------------------------
