@@ -15,6 +15,8 @@ def autentica(login, senha):
     return "true" in str(requests.get("http://localhost:8080/conta/nome", params=params).content)
 
 def cadastra(email, username, senha, confirmação):  #  envio os parâmetros e quero receber se o cadastro foi bem sucedido ou não (retorno: Bool)
+    body = {"nome": username, "senha": senha, "email": email}
+    a = requests.post("http://localhost:8080/conta/", data=body)
     return True
 
 def solicitarRecuperação(meio, info):  # envio o meio (int: 1 - email, 2 - sms, 3 - correios) e a informação (o email, o numero de telefone ou o endereço) e espero que a informação seja checada pra ver se faz sentido (é uma string crua) e, se fizer, que seja "enviado" o código por esse meio. De retorno, espero receber se deu tudo certo ou não (retorno: Bool)
