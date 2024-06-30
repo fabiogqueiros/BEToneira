@@ -69,20 +69,20 @@ def getDatas(filtros):
 
 def getData(tipo):
     while True:
-        data = input(f"Insira a data de {tipo} (DD/MM/YYYY): ")
+        data = input(f"Insira a data de {tipo} (YYYY-MM-DD): ")
         if isValidDate(data):
             return data
         else:
             print("Data inválida. Tente novamente.")
         
 def isValidDate(data):
-    data = data.split('/')
+    data = data.split('-')
     if len(data) == 3:
-        if len(data[0]) != 2:
+        if len(data[0]) != 4:
             return False
         if len(data[1]) != 2:
             return False
-        if len(data[2]) != 4:
+        if len(data[2]) != 2:
             return False
         c = 0
         for v in data:

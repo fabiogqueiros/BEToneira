@@ -15,9 +15,8 @@ def autentica(login, senha):
     return "true" in str(requests.get("http://localhost:8080/conta/nome", params=params).content)
 
 def cadastra(email, username, senha, confirmação):  #  envio os parâmetros e quero receber se o cadastro foi bem sucedido ou não (retorno: Bool)
-    body = {"nome": username, "senha": senha, "email": email}
-    a = requests.post("http://localhost:8080/conta/", data=body)
-    return True
+    body = {'nome': username, 'senha': senha, 'email': email}
+    return "true" in str(requests.post("http://localhost:8080/conta/", json=body).content)
 
 def solicitarRecuperação(meio, info):  # envio o meio (int: 1 - email, 2 - sms, 3 - correios) e a informação (o email, o numero de telefone ou o endereço) e espero que a informação seja checada pra ver se faz sentido (é uma string crua) e, se fizer, que seja "enviado" o código por esse meio. De retorno, espero receber se deu tudo certo ou não (retorno: Bool)
     return True
@@ -45,22 +44,38 @@ def excluiConta(email, senha):  # checa se a senha está correta e, se sim, excl
 # ----------------------------Saque e Depósito----------------------------
 
 def fazerSaque(valor, senha, banco, conta, email):  # envio as informações e quero receber se o saque foi bem sucedido ou não
-    body = {"tipo": "Saque", "quantia": valor}
-    a = requests.post("http://localhost:8080/transacao/", data=body)
+    body = {"tipo": "Saque", "quantia": valor, "nome": email, "modo": "Enviado"}
+    requests.post("http://localhost:8080/transacao/", json=body)
     return True
 
 def getChave(email, valor):  # não sei se vai ficar assim mesmo, mas eu envio um valor e espero receber uma chave pix pra fazer o depósito (retorno: String)
-    body = {"tipo": "Saque", "quantia": valor, "modo": "Esperando Pagamento"}
-    a = requests.post("http://localhost:8080/transacao/", data=body)
+    body = {"tipo": "Deposito", "quantia": valor, "modo": "Esperando Pagamento", "nome": email}
+    requests.post("http://localhost:8080/transacao/", json=body)
     return "PIXDOFABIO"
 
 # -----------------------------Consultas------------------------------
 
 def geraExtrato(email, filtros):  # envio filtros (tanto "filtros" quando "datas", que eu separei por diferença de tipo) e quero receber uma string formatada do extrato, ou então uma lista das entradas do extrato para futura formatação (retorno: String ou [String])
     datas = []
+    tipoTransacao = 0
+    dataInicio = 0
+    dataFim = 0
     if isValidDate(filtros[-1]):
         datas = [filtros[-2], filtros[-1]]
         filtros = filtros[0:-2]
+        dataInicio = datas[0]
+        dataFim = datas[1]
+
+
+    if len(filtros) == 1:
+        tipoTransacao = filtros[0]
+
+    if(dataInicio != 0):
+        params = {"nome": email, "tipo": tipoTransacao, "dataInicio": dataInicio, "dataFim": dataFim}
+        print(params)
+        print(requests.get("http://localhost:8080/transacao/filter", params=params))
+    else:
+        print(requests.get("http://localhost:8080/transacao/filter", params={"nome": email, "tipo": tipoTransacao, "dataInicio": "2000-12-12", "dataFim": "2050-12-12"}))
 
     '''
     filtros pode conter de 0 a 2 números:
@@ -69,8 +84,6 @@ def geraExtrato(email, filtros):  # envio filtros (tanto "filtros" quando "datas
     datas pode conter 0 ou 2 datas (inicio e fim)
     as datas são string
     '''
-
-    print("\n<<<Aqui ficaria o extrato>>>\n")
 
 def geraHistorico(email, filtros):  # envio filtros (tanto "filtros" quando "datas", que eu separei por diferença de tipo) e quero receber uma string formatada do histórico, ou então uma lista das entradas do histórico para futura formatação (retorno: String ou [String])
     datas = []
@@ -144,15 +157,15 @@ def pararReq(email):  # para o aviãozinho, se ainda não tiver crashado, e reto
     return 1.24
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------
-#ignora isso
+
 def isValidDate(data):
-    data = data.split('/')
+    data = data.split('-')
     if len(data) == 3:
-        if len(data[0]) != 2:
+        if len(data[0]) != 4:
             return False
         if len(data[1]) != 2:
             return False
-        if len(data[2]) != 4:
+        if len(data[2]) != 2:
             return False
         c = 0
         for v in data:
