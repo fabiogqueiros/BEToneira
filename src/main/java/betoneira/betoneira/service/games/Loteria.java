@@ -18,10 +18,12 @@ public class Loteria extends Jogos{
     private static Loteria loteria;
     private Map<Integer, List<Aposta>> bilhetes;//Nao defini ao certo a tipagem, mas deixar como lembrete de (Aposta, numero)
     private int[] numerosValidos;//Atualizar o diagrama de classes
+    public LoteriaPub publisher;
 
     private Loteria(int qtdeNum, int minutes){//Completar a inicializacao dos atributos
         this.inicio = LocalTime.now();
         this.fim = this.inicio.plusMinutes(minutes);
+        this.publisher = LoteriaPub();
 
         this.multiplicador = (float) 1.1;
         this.numerosValidos = new int[qtdeNum];
