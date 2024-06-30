@@ -60,11 +60,14 @@ def geraExtrato(email, filtros):  # envio filtros (tanto "filtros" quando "datas
     tipoTransacao = 0
     dataInicio = 0
     dataFim = 0
-    if isValidDate(filtros[-1]):
-        datas = [filtros[-2], filtros[-1]]
-        filtros = filtros[0:-2]
-        dataInicio = datas[0]
-        dataFim = datas[1]
+    
+    if len(filtros) > 1:
+        if isinstance(filtros[-1], str):
+            if isValidDate(filtros[-1]):
+                datas = [filtros[-2], filtros[-1]]
+                filtros = filtros[0:-2]
+                dataInicio = datas[0]
+                dataFim = datas[1]
 
 
     if len(filtros) == 1:
@@ -72,10 +75,9 @@ def geraExtrato(email, filtros):  # envio filtros (tanto "filtros" quando "datas
 
     if(dataInicio != 0):
         params = {"nome": email, "tipo": tipoTransacao, "dataInicio": dataInicio, "dataFim": dataFim}
-        print(params)
-        print(requests.get("http://localhost:8080/transacao/filter", params=params))
+        print(requests.get("http://localhost:8080/transacao/filter", params=params).text)
     else:
-        print(requests.get("http://localhost:8080/transacao/filter", params={"nome": email, "tipo": tipoTransacao, "dataInicio": "2000-12-12", "dataFim": "2050-12-12"}))
+        print(requests.get("http://localhost:8080/transacao/filter", params={"nome": email, "tipo": tipoTransacao, "dataInicio": "2000-12-12", "dataFim": "2050-12-12"}).text)
 
     '''
     filtros pode conter de 0 a 2 números:
@@ -87,10 +89,16 @@ def geraExtrato(email, filtros):  # envio filtros (tanto "filtros" quando "datas
 
 def geraHistorico(email, filtros):  # envio filtros (tanto "filtros" quando "datas", que eu separei por diferença de tipo) e quero receber uma string formatada do histórico, ou então uma lista das entradas do histórico para futura formatação (retorno: String ou [String])
     datas = []
-    if isValidDate(filtros[-1]):
-        datas = [filtros[-2], filtros[-1]]
-        filtros = filtros[0:-2]
-
+    tipoTransacao = 0
+    dataInicio = 0
+    dataFim = 0
+    
+    if filtros:
+        if isValidDate(filtros[-1]):
+            datas = [filtros[-2], filtros[-1]]
+            filtros = filtros[0:-2]
+            dataInicio = datas[0]
+            dataFim = datas[1]
     '''
     filtros pode conter de 0 a 3 números:
     1 - Loteria
