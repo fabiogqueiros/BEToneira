@@ -22,14 +22,19 @@ public class TransacaoController {
         return service.getTransacoes();
     }
 
+    @RequestMapping(value="/nome/{nome}", method = RequestMethod.GET)
+    public @ResponseBody List<Transacao> getTransacoesByNome(@PathVariable String nome){
+        return service.getTransacoesByNome(nome);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody Transacao getTransacaoById(@PathVariable int id) {
         return service.getTransacaoById(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public @ResponseBody Transacao createTransacao(@RequestBody Transacao transacao) {
-        return service.createTransacao(transacao);
+    public @ResponseBody void createTransacao(@RequestBody Transacao transacao) {
+        service.createTransacao(transacao);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
@@ -42,9 +47,9 @@ public class TransacaoController {
         return service.deleteTransacaoById(id);
     }
 
-    @RequestMapping(value = "/filter", params = {"dataInicio", "dataFim"}, method = RequestMethod.GET)
-    public @ResponseBody List<Transacao> getTransacaoWithFilter(@RequestParam("dataInicio") String inicio, @RequestParam("dataFim") String fim) {
-        return service.getTransacaoWithFilter(inicio, fim);
+    @RequestMapping(value = "/filter", params = {"nome", "tipo", "dataInicio", "dataFim"}, method = RequestMethod.GET)
+    public @ResponseBody String getTransacaoByNomeWithFilter(@RequestParam("nome") String nome,@RequestParam("tipo") int tipo ,@RequestParam("dataInicio") String inicio, @RequestParam("dataFim") String fim) {
+        return service.getTransacaoByNomeWithFilter(nome, tipo, inicio, fim);
     }
 
 }
