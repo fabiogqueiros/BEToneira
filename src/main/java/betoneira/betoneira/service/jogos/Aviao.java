@@ -13,22 +13,26 @@ public class Aviao extends Jogos{
         //LocalTime now = 0.0;
         this.multiplicadorAtual = (float) 0.0;
     }
+
     public void parar(){
         System.out.println("Voce ganhou xxx moedas virtuais");
         this.encerrarJogo();
     }
+
     private void aviaoSobe(){//No diagrama esta como publico, nao acho que deve ser isso
-        this.multiplicadorAtual = this.calcularMultiplicador();
+        this.multiplicadorAtual += this.calcularMultiplicador();
         if(this.sorteia() == 0){//Aviao perdeu
             this.aviaoCrash();
         }
         this.tempo+=0.1;
     }
+
     private void aviaoCrash(){
         this.estado = "Caiu";
         System.out.println("O aviao "+estado+" pelo tempo de ");//adicioanar o tempo
         this.encerrarJogo();
     }
+
     public void encerrarJogo(){
         System.out.println("O jogo foi encerrado!");
     }

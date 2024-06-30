@@ -2,6 +2,7 @@ package betoneira.betoneira.controller;
 
 import betoneira.betoneira.model.Aposta;
 import betoneira.betoneira.repository.ApostaRepository;
+import betoneira.betoneira.service.ApostaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,38 +14,34 @@ import java.util.List;
 public class ApostaController {
 
     @Autowired
-    private ApostaRepository repository;
+    private ApostaService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public @ResponseBody List<Aposta> getApostas() {
-        return repository.findAll();
+        return service.getApostas();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody Aposta getApostaById(@PathVariable int id) {
-        return repository.findById(id);
+        return service.getApostaById(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public @ResponseBody Aposta createAposta(@RequestBody Aposta aposta) {
-        return repository.save(aposta);
+        return service.createAposta(aposta);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public @ResponseBody Aposta updateAposta(@RequestBody Aposta aposta) {
-        return repository.save(aposta);
+        return service.updateAposta(aposta);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody Aposta deleteApostaById(@PathVariable int id) {
-        Aposta aposta = repository.findById(id);
-        if (aposta == null) {
-            return null;
-        } else {
-            repository.delete(aposta);
-            return aposta;
-        }
+        return service.deleteApostaById(id);
     }
+
+
 
 
 

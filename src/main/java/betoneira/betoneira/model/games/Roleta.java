@@ -1,28 +1,19 @@
 package betoneira.betoneira.model.games;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+@AllArgsConstructor
+@Getter
+@Setter
 public class Roleta extends Jogos{
-    private String cores[];
-    private Integer numeros[];
     private String corEscolhida;
-    private Integer numeroEscolhido;
+    private int numeroEscolhido;
+    protected Map<Integer, String> colorsNumbers;
 
-
-    //@Override
-    public void iniciarJogo(){
-        //Implement Method
-    }
-    public List<?> sorteia(){//Refazer a assinatura, somente definicao (Ha sentido retornar uma lista? Porque?)
-        //Implements Method
-        return new ArrayList<>();
-    }
-    public void encerrarJogo(){
-        //Implements Method
-    }
-    public Integer calcularMultiplicador(){
-        //Implements Method
-        return 1;
-    }
 }

@@ -8,8 +8,14 @@ import java.util.Map;
 import java.util.Random;
 
 import betoneira.betoneira.model.Aposta;
+import betoneira.betoneira.service.ApostaService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 public class Loteria extends Jogos{
+
     private LocalTime inicio;
     private LocalTime fim;
     private static Loteria loteria;
@@ -27,14 +33,16 @@ public class Loteria extends Jogos{
             this.numerosValidos[i] = i+1;
             this.bilhetes.put(i+1, new ArrayList<Aposta>());
         }
-        
+
     }
+
     public static Loteria getCurrentLoteria(){
         if(loteria == null){
             loteria = new Loteria(60, 2);//Qtde de numeros para se apostar, e tempo para apostar
         }
         return loteria;
     }
+
     //@Override
     public void iniciarJogo(){
         System.out.println("Inicio o jogo!");

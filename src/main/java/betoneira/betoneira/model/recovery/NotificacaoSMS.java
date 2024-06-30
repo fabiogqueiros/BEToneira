@@ -1,15 +1,14 @@
 package betoneira.betoneira.model.recovery;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter
+@Setter
 public class NotificacaoSMS{
     
-    String tel;
-
-    public NotificacaoSMS(String tel){
-        this.tel = tel;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
+    public String telefone;
 }

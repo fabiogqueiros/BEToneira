@@ -14,7 +14,7 @@ public class SMService extends DecoratorService{
     @Override
     public void enviaCodigo(String codigo){
         super.enviaCodigo(codigo);
-        System.out.printf("Uau!! Enviamos um SMS para %s com o código %s !!", nsms.getTel(), codigo);
+        System.out.printf("Uau!! Enviamos um SMS para %s com o código %s !!", nsms.getTelefone(), codigo);
     }
     
 }

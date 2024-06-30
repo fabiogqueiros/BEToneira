@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Table(name= "aposta")
 @NoArgsConstructor
@@ -21,10 +23,6 @@ public class Aposta {
     @Setter
     private float quantia;
 
-//    @OneToMany
-//    private Jogos jogo;
-
-
     @Getter
     @Setter
     private String tipoJogo;//E necessario?
@@ -37,6 +35,24 @@ public class Aposta {
     @Getter
     @Setter
     private float salto;
+
+    @Getter
+    @Setter
+    private Date dataDaAposta;
+
+
+    public Aposta(int id, float quantia, String tipoJogo, Conta conta, float salto){
+        this.id = id;
+        this.quantia = quantia;
+        this.tipoJogo = tipoJogo;
+        this.conta = conta;
+        this.salto = salto;
+        this.dataDaAposta = new Date();
+    }
+
+
+
+
 
 
     public void iniciarJogo() {
