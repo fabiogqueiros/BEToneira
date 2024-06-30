@@ -1,5 +1,6 @@
 from random import randint
 import requests
+#from aux_functions import isValidDate
 
 #
 # QUANDO EU DIGO EMAIL, PROVAVELMENTE É O USERNAME, EU SÓ NÃO TROQUEI AINDA
@@ -16,8 +17,8 @@ def autentica(login, senha):
 def cadastra(email, username, senha, confirmação):  #  envio os parâmetros e quero receber se o cadastro foi bem sucedido ou não (retorno: Bool)
     return True
 
-def solicitarRecuperação(email):  # te envio o email e não quero receber nada, mas o código tem que ser gerado e "mandado" pro email da pessoa
-    pass
+def solicitarRecuperação(meio, info):  # envio o meio (int: 1 - email, 2 - sms, 3 - correios) e a informação (o email, o numero de telefone ou o endereço) e espero que a informação seja checada pra ver se faz sentido (é uma string crua) e, se fizer, que seja "enviado" o código por esse meio. De retorno, espero receber se deu tudo certo ou não (retorno: Bool)
+    return True
 
 def confirmarEmail(codigo, email):  # envio o código que o usuario escreveu e espero receber se esse foi o código enviado mesmo ou não (retorno: Bool)
     return True
@@ -44,16 +45,42 @@ def excluiConta(email, senha):  # checa se a senha está correta e, se sim, excl
 def fazerSaque(valor, senha, banco, conta, email):  # envio as informações e quero receber se o saque foi bem sucedido ou não
     return True
 
-def getChave(email, valor):  # -- a checar se vai ser assim mesmo -- 
+def getChave(email, valor):  # não sei se vai ficar assim mesmo, mas eu envio um valor e espero receber uma chave pix pra fazer o depósito (retorno: String)
     return "PIXDOFABIO"
 
 # -----------------------------Consultas------------------------------
-# tá faltando documentar essa parte ainda
 
-def geraExtrato(email, filtros):  # envio filtros e quero receber uma string formatada do extrato, ou então uma lista das entradas do extrato para futura formatação (retorno: String ou [String])
-    print("\n<<<Aqui ficaria o extrato>>>\n") # ainda vou botar mais detalhes sobre os filtros, tanto pra essa função quanto pras 2 abaixo.
+def geraExtrato(email, filtros):  # envio filtros (tanto "filtros" quando "datas", que eu separei por diferença de tipo) e quero receber uma string formatada do extrato, ou então uma lista das entradas do extrato para futura formatação (retorno: String ou [String])
+    datas = []
+    if isValidDate(filtros[-1]):
+        datas = [filtros[-2], filtros[-1]]
+        filtros = filtros[0:-2]
 
-def geraHistorico(email, filtros):  # envio filtros e quero receber uma string formatada do histórico, ou então uma lista das entradas do histórico para futura formatação (retorno: String ou [String])
+    '''
+    filtros pode conter de 0 a 2 números:
+    1 - Saque
+    2 - Depósito
+    datas pode conter 0 ou 2 datas (inicio e fim)
+    as datas são string
+    '''
+
+    print("\n<<<Aqui ficaria o extrato>>>\n")
+
+def geraHistorico(email, filtros):  # envio filtros (tanto "filtros" quando "datas", que eu separei por diferença de tipo) e quero receber uma string formatada do histórico, ou então uma lista das entradas do histórico para futura formatação (retorno: String ou [String])
+    datas = []
+    if isValidDate(filtros[-1]):
+        datas = [filtros[-2], filtros[-1]]
+        filtros = filtros[0:-2]
+
+    '''
+    filtros pode conter de 0 a 3 números:
+    1 - Loteria
+    2 - Avião
+    3 - Roleta
+    datas pode conter 0 ou 2 datas (inicio e fim)
+    as datas são string
+    '''
+
     print("\n<<<Aqui ficaria o histórico>>>\n")
 
 def geraRanking(opt):  # envio o jogo e quero receber uma string formatada do ranking, ou então uma lista das entradas do ranking para futura formatação (retorno: String ou [String])
@@ -109,3 +136,28 @@ def crashou():  #lógica fake. aqui estaria a requisição. espero receber se o 
 
 def pararReq(email):  # para o aviãozinho, se ainda não tiver crashado, e retorna o multiplicador real no momento da parada (retorno: Float)
     return 1.24
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------
+#ignora isso
+def isValidDate(data):
+    data = data.split('/')
+    if len(data) == 3:
+        if len(data[0]) != 2:
+            return False
+        if len(data[1]) != 2:
+            return False
+        if len(data[2]) != 4:
+            return False
+        c = 0
+        for v in data:
+            try:
+                int(v)
+                c += 1
+            except ValueError:
+                pass
+        if c == 3:
+            return True
+        else: 
+            return False
+    else:
+        return False

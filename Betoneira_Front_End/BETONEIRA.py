@@ -294,8 +294,25 @@ def cadastrar():
                 break
 
 def recuperarSenha():
-    email = getEmail()
-    solicitarRecuperação(email)
+    while True:
+        print("Por onde deseja receber o código?")
+        opt = getInput(["Email", "SMS", "Correios"])
+        txt = ''
+        if opt == 1:
+            txt = "seu email"
+        elif opt == 2:
+            txt = "seu número de telefone"
+        elif opt == 3:
+            txt = "seu endereço"
+        info = input(f"Digite o {txt}: ")
+        deuCerto = solicitarRecuperação(opt, info)
+        if deuCerto:
+            break
+        else:
+            print("Ops! Algo deu errado.")
+            opt = getInput(["Tentar de novo", "Voltar"])
+            if opt == 2:
+                return
     while True:
         codigo = input("Digite o código enviado para o seu email: ")
         if confirmarEmail(codigo, email):

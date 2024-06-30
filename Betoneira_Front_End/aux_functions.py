@@ -111,17 +111,6 @@ def getNumeros(ini, fim):
         except:
             print("Formatação ou dados errados. Tente novamente.")
 
-def getEmail():
-    while True:
-        email = input("Digite o seu email: ")
-        if emailCorreto(email):
-            return email
-        else:
-            print("Email inválido. Tente novamente.")
-
-def emailCorreto(email):
-    return True
-
 def getQuantia(email):
     while True:
         ipt = input("Quanto gostaria de apostar? V$")
