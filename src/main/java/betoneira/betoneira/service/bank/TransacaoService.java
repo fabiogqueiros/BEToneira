@@ -71,6 +71,7 @@ public class TransacaoService {
         List<Transacao> todasTransacoes = this.getTransacoesByNome(nome);
         Iterator<Transacao> iterador = todasTransacoes.iterator();
         String tipoTransacao = "";
+        String listaFinal = "";
         if(tipo == 1){
             tipoTransacao = "Saque";
         } else if (tipo == 2) {
@@ -92,9 +93,14 @@ public class TransacaoService {
                     }
                 }
             }
-
         }
-        return listaTransacao.toString();
+        Iterator<Transacao> iteradorFinal = listaTransacao.iterator();
+        while(iteradorFinal.hasNext()){
+            Transacao transacaoPrint = iteradorFinal.next();
+            listaFinal = listaFinal + "Tipo: " + transacaoPrint.getTipo() + "\nQuantia: " + String.valueOf(transacaoPrint.getQuantia()) + "\nData da Transacao: " + transacaoPrint.getDataTransacao().toString() + "\n\n";
+        }
+
+        return listaFinal;
     }
 
 }
