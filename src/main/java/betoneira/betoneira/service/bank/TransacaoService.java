@@ -22,13 +22,28 @@ public class TransacaoService {
         return repository.findAll();
     }
 
+    public List<Transacao> getTransacoesByNome(String nome) {
+        List<Transacao> todasTransacoes = repository.findAll();
+        Iterator<Transacao> iterador = todasTransacoes.iterator();
+        List<Transacao> transacoesUsuario = new ArrayList<Transacao>();
+        while (iterador.hasNext()) {
+            Transacao transacaoAtual = iterador.next();
+            if (transacaoAtual.getNome() != null) {
+                if (transacaoAtual.getNome().equals(nome)) {
+                    transacoesUsuario.add(transacaoAtual);
+                }
+            }
+        }
+        return transacoesUsuario;
+    }
+
 
     public Transacao getTransacaoById(int id) {
         return repository.findById(id);
     }
 
 
-    public Transacao createTransacao( Transacao transacao) {
+    public Transacao createTransacao(Transacao transacao) {
         transacao.setDataTransacao(LocalDate.now());
         return repository.save(transacao);
     }
@@ -49,22 +64,37 @@ public class TransacaoService {
         }
     }
 
-
-    public List<Transacao> getTransacaoWithFilter(String inicio, String fim){
+    public String getTransacaoByNomeWithFilter(String nome, int tipo, String inicio, String fim){
         LocalDate dataInicio = LocalDate.parse(inicio);
         LocalDate dataFim = LocalDate.parse(fim);
         List<Transacao> listaTransacao = new ArrayList<>();
-        List<Transacao> todasTransacoes = this.getTransacoes();
+        List<Transacao> todasTransacoes = this.getTransacoesByNome(nome);
         Iterator<Transacao> iterador = todasTransacoes.iterator();
+        String tipoTransacao = "";
+        if(tipo == 1){
+            tipoTransacao = "Saque";
+        } else if (tipo == 2) {
+            tipoTransacao = "Deposito";
+        }
         while (iterador.hasNext()){
             Transacao transacao = iterador.next();
-            if(transacao.getDataTransacao() != null){
-                if(!dataInicio.isAfter(transacao.getDataTransacao()) && !dataFim.isBefore(transacao.getDataTransacao())){
-                    listaTransacao.add(transacao);
+            if(tipo == 1 || tipo == 2){
+                if(transacao.getDataTransacao() != null && transacao.getTipo().equals(tipoTransacao)){
+                    if(!dataInicio.isAfter(transacao.getDataTransacao()) && !dataFim.isBefore(transacao.getDataTransacao())){
+                        listaTransacao.add(transacao);
+                    }
                 }
             }
+            else{
+                if(transacao.getDataTransacao() != null){
+                    if(!dataInicio.isAfter(transacao.getDataTransacao()) && !dataFim.isBefore(transacao.getDataTransacao())){
+                        listaTransacao.add(transacao);
+                    }
+                }
+            }
+
         }
-        return listaTransacao;
+        return listaTransacao.toString();
     }
 
 }

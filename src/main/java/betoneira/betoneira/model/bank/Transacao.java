@@ -25,12 +25,15 @@ public class Transacao {
 
     @Getter @Setter private String modo;
 
+    @Getter @Setter private String nome;
+
     @Getter @Setter private LocalDate dataTransacao;
 
 
-    public Transacao(String tipo, float quantia, String modo) {
+    public Transacao(String tipo, float quantia, String nome, String modo) {
         this.tipo = tipo;
         this.quantia = quantia;
+        this.nome = nome;
         this.modo = modo;
         this.dataTransacao = LocalDate.now();
     }

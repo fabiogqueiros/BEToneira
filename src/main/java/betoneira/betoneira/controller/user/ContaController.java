@@ -2,6 +2,7 @@ package betoneira.betoneira.controller.user;
 
 import betoneira.betoneira.model.user.Conta;
 import betoneira.betoneira.repository.ContaRepository;
+import betoneira.betoneira.service.user.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,52 +13,36 @@ import java.util.List;
 public class ContaController {
 
     @Autowired
-    private ContaRepository repository;
+    private ContaService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public @ResponseBody List<Conta> getContas() {
-        return repository.findAll();
+        return service.getContas();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody Conta getContaById(@PathVariable int id) {
-        return repository.findById(id);
+        return service.getContaById(id);
     }
 
     @RequestMapping(value = "/nome", params = {"nome", "senha"}, method = RequestMethod.GET)
     public @ResponseBody Boolean authenticateConta(@RequestParam("nome") String nome, @RequestParam("senha") String senha) {
-        Conta contaAtual = repository.findByNome(nome);
-        if (contaAtual == null) {
-            return false;
-        } else {
-            if (contaAtual.getSenha().equals(senha)) {
-                return true;
-            }
-            return false;
-        }
+        return service.authenticateConta(nome, senha);
     }
 
-
-
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public @ResponseBody Conta createConta(@RequestBody Conta conta) {
-        return repository.save(conta);
+    public @ResponseBody Boolean createConta(@RequestBody Conta conta) {
+        return service.createConta(conta);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public @ResponseBody Conta updateConta(@RequestBody Conta conta) {
-        return repository.save(conta);
+        return service.updateConta(conta);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody Conta deleteContaById(@PathVariable int id) {
-        Conta conta = repository.findById(id);
-        if (conta == null) {
-            return null;
-        } else {
-            repository.delete(conta);
-            return conta;
-        }
+        return deleteContaById(id);
     }
 
 
