@@ -16,7 +16,7 @@ Sendo usado tão como operações de autenticação, cadastro, saques, entre out
 
 <h3>Discentes do Trabalho:</h3>
 Arthur Leogério Bougleux Sodré - arthur_lbs@id.uff.br
-<br>Dário Chen Chen Ye - ##############
+<br>Dário Chen Chen Ye - darioye@id.uff.br
 <br>Fábio Gabriel de Queirós - fabiogabriel@midiacom.uff.br
 <br>Leonardo Meato Fernandes - lmeato@id.uff.br
 <br>Thiago da Rocha Thomaz - trthomaz@id.uff.br
