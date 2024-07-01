@@ -12,6 +12,9 @@ public class EmailService extends NotificacaoService{
     
     @Override
     public void enviaCodigo(String codigo){
+
         System.out.printf("Uau! Enviamos um email para %s com o código %s !!", n.getEmail(), codigo);
+        EmailSender sender = new UFFmailAdapter();
+        sender.enviaEmail(n.getEmail(), codigo);
     }
 }
